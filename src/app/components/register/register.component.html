@@ -1,0 +1,87 @@
+<div class="register-container">
+    <h2>Register</h2>
+  
+    <form (ngSubmit)="register()" #registerForm="ngForm">
+      <!-- First Name -->
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input 
+          type="text" 
+          id="firstName" 
+          [(ngModel)]="user.firstName" 
+          name="firstName" 
+          required
+          class="form-control"
+          #firstName="ngModel"
+        />
+        <div *ngIf="firstName.invalid && firstName.touched" class="error-message">
+          First name is required.
+        </div>
+      </div>
+  
+      <!-- Last Name -->
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input 
+          type="text" 
+          id="lastName" 
+          [(ngModel)]="user.lastName" 
+          name="lastName" 
+          required
+          class="form-control"
+          #lastName="ngModel"
+        />
+        <div *ngIf="lastName.invalid && lastName.touched" class="error-message">
+          Last name is required.
+        </div>
+      </div>
+  
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input 
+          type="email" 
+          id="email" 
+          [(ngModel)]="user.email" 
+          name="email" 
+          required
+          pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
+          class="form-control"
+          #email="ngModel"
+        />
+        <div *ngIf="email.invalid && email.touched" class="error-message">
+          Enter a valid email address.
+        </div>
+      </div>
+  
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          [(ngModel)]="user.password" 
+          name="password" 
+          required
+          minlength="8"
+          pattern="^(?=.*[A-Z])(?=.*\d).+$"
+          class="form-control"
+          #password="ngModel"
+        />
+        <div *ngIf="password.invalid && password.touched" class="error-message">
+          Password must be at least 8 characters long and contain one uppercase letter and one digit.
+        </div>
+      </div>
+  
+      <!-- Submit Button -->
+      <button type="submit" class="register-btn" [disabled]="registerForm.invalid">
+        Register
+      </button>
+    </form>
+  
+    <p>Already have an account? <a routerLink="/login">Login</a></p>
+  
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  </div>
+  
